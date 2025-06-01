@@ -9,7 +9,6 @@ import ServiceDetailPage from './pages/ServiceDetailPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import CreateListingPage from './pages/CreateListingPage';
 import NotFoundPage from './pages/NotFoundPage';
 import PrivateRoute from './components/auth/PrivateRoute';
 import './App.css';
@@ -28,14 +27,6 @@ function App() {
               <Route path="/products/:id" element={<ProductDetailPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route 
-                path="/create-listing" 
-                element={
-                  <PrivateRoute>
-                    <CreateListingPage />
-                  </PrivateRoute>
-                } 
-              />
               <Route path="/404" element={<NotFoundPage />} />
               <Route path="*" element={<Navigate to="/404" />} />
             </Routes>
