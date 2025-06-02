@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+import BoltBadge from './components/common/BoltBadge';
 import HomePage from './pages/HomePage';
 import BrowsePage from './pages/BrowsePage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
@@ -45,6 +46,7 @@ function App() {
             </Routes>
           </main>
           <Footer />
+          <BoltBadge />
         </div>
       </Router>
     </AuthProvider>
