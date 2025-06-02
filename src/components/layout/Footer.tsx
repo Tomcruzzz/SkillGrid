@@ -11,9 +11,9 @@ const Footer: React.FC = () => {
           <div>
             <div className="flex items-center mb-4">
               <div className="bg-gradient-to-r from-teal-500 to-purple-600 text-white p-2 rounded-lg mr-2">
-                <div className="font-bold">SM</div>
+                <div className="font-bold">SG</div>
               </div>
-              <span className="font-bold text-xl">ServiceMarket</span>
+              <span className="font-bold text-xl">SkillGrid</span>
             </div>
             <p className="text-gray-400 mb-4">
               Connecting people with services and products they need. Find, book, and hire trusted professionals in your area.
@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} ServiceMarket. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} SkillGrid. All rights reserved.</p>
         </div>
       </div>
     </footer>

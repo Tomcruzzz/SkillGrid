@@ -41,9 +41,9 @@ const Header: React.FC = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="bg-gradient-to-r from-teal-500 to-purple-600 text-white p-2 rounded-lg mr-2">
-                <div className="font-bold">SM</div>
+                <div className="font-bold">SG</div>
               </div>
-              <span className="font-bold text-xl text-gray-900">ServiceMarket</span>
+              <span className="font-bold text-xl text-gray-900">SkillGrid</span>
             </div>
           </Link>
 
