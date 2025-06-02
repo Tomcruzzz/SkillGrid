@@ -6,7 +6,7 @@ const BoltBadge: React.FC = () => {
       href="https://bolt.new"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-4 right-4 z-50 transition-transform hover:scale-105"
+      className="fixed top-4 right-4 z-50 transition-transform hover:scale-105"
     >
       <img
         src="/black_circle_360x360.png"
