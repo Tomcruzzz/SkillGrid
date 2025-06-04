@@ -7,6 +7,7 @@
 @layer base {
   html {
     font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -40,15 +41,15 @@
   }
 
   .btn-primary {
-    @apply bg-teal-600 text-white hover:bg-teal-700 active:bg-teal-800;
+    @apply bg-teal-600 text-white hover:bg-teal-700 active:bg-teal-800 shadow-sm hover:shadow transform hover:-translate-y-0.5;
   }
 
   .btn-secondary {
-    @apply bg-purple-600 text-white hover:bg-purple-700 active:bg-purple-800;
+    @apply bg-purple-600 text-white hover:bg-purple-700 active:bg-purple-800 shadow-sm hover:shadow transform hover:-translate-y-0.5;
   }
 
   .btn-outline {
-    @apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 active:bg-gray-100;
+    @apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 active:bg-gray-100 shadow-sm hover:shadow transform hover:-translate-y-0.5;
   }
 
   .btn-sm {
@@ -60,7 +61,7 @@
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-md overflow-hidden transition-all duration-200;
+    @apply bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-200;
   }
 
   .card-hover {
@@ -68,11 +69,11 @@
   }
 
   .input {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent;
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-shadow duration-200;
   }
 
   .select {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent;
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-shadow duration-200;
   }
 
   .container {
@@ -84,27 +85,27 @@
   }
 
   .badge {
-    @apply px-2 py-1 text-xs font-medium rounded-full;
+    @apply px-2 py-1 text-xs font-medium rounded-full transition-colors duration-200;
   }
 
   .badge-primary {
-    @apply bg-teal-100 text-teal-800;
+    @apply bg-teal-100 text-teal-800 hover:bg-teal-200;
   }
 
   .badge-secondary {
-    @apply bg-purple-100 text-purple-800;
+    @apply bg-purple-100 text-purple-800 hover:bg-purple-200;
   }
 
   .badge-success {
-    @apply bg-green-100 text-green-800;
+    @apply bg-green-100 text-green-800 hover:bg-green-200;
   }
 
   .badge-warning {
-    @apply bg-amber-100 text-amber-800;
+    @apply bg-amber-100 text-amber-800 hover:bg-amber-200;
   }
 
   .badge-error {
-    @apply bg-red-100 text-red-800;
+    @apply bg-red-100 text-red-800 hover:bg-red-200;
   }
 }
 
@@ -160,4 +161,77 @@
 .nav-link:hover::after,
 .nav-link.active::after {
   width: 100%;
+}
+
+/* Loading skeleton animation */
+.skeleton {
+  @apply bg-gray-200 animate-pulse rounded;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+}
+
+/* Focus styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-teal-500 ring-offset-2;
+}
+
+/* Form validation styles */
+.input.error {
+  @apply border-red-500 focus:ring-red-500;
+}
+
+.error-message {
+  @apply text-sm text-red-600 mt-1;
+}
+
+/* Toast notifications */
+.toast {
+  @apply fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 transform transition-all duration-300;
+}
+
+.toast-enter {
+  @apply translate-y-full opacity-0;
+}
+
+.toast-enter-active {
+  @apply translate-y-0 opacity-100;
+}
+
+.toast-exit {
+  @apply translate-y-0 opacity-100;
+}
+
+.toast-exit-active {
+  @apply translate-y-full opacity-0;
+}
+
+/* Image hover zoom effect */
+.image-zoom {
+  @apply overflow-hidden;
+}
+
+.image-zoom img {
+  @apply transition-transform duration-300 hover:scale-110;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-purple-600;
+}
+
+/* Glass effect */
+.glass {
+  @apply bg-white bg-opacity-20 backdrop-blur-lg;
 }
