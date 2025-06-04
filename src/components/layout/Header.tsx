@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, User, LogOut, Search, Bell, MessageSquare } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import ThemeToggle from '../common/ThemeToggle';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -79,6 +80,7 @@ const Header: React.FC = () => {
 
           {/* Desktop Search & Auth */}
           <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
             <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
@@ -158,6 +160,21 @@ const Header: React.FC = () => {
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 animate-fadeIn">
+            <div className="lg:hidden mb-4">
+              <div className="flex items-center justify-between mb-4">
+                <ThemeToggle />
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="text-foreground hover:text-primary-600 focus:outline-none"
+                >
+                  {isMenuOpen ? (
+                    <X className="h-6 w-6" />
+                  ) : (
+                    <Menu className="h-6 w-6" />
+                  )}
+                </button>
+              </div>
+            </div>
             <form onSubmit={handleSearch} className="mb-4 relative">
               <input
                 type="text"
