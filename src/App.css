@@ -5,13 +5,58 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 183 100% 35%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 271 91% 65%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 183 100% 35%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 183 100% 35%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 271 91% 65%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 183 100% 35%;
+  }
+
   html {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-background text-foreground transition-colors duration-300;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -41,15 +86,15 @@
   }
 
   .btn-primary {
-    @apply bg-teal-600 text-white hover:bg-teal-700 active:bg-teal-800 shadow-sm hover:shadow transform hover:-translate-y-0.5;
+    @apply bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 shadow-sm hover:shadow transform hover:-translate-y-0.5 dark:bg-primary-600 dark:hover:bg-primary-500;
   }
 
   .btn-secondary {
-    @apply bg-purple-600 text-white hover:bg-purple-700 active:bg-purple-800 shadow-sm hover:shadow transform hover:-translate-y-0.5;
+    @apply bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-700 shadow-sm hover:shadow transform hover:-translate-y-0.5 dark:bg-secondary-600 dark:hover:bg-secondary-500;
   }
 
   .btn-outline {
-    @apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 active:bg-gray-100 shadow-sm hover:shadow transform hover:-translate-y-0.5;
+    @apply border border-border bg-background text-foreground hover:bg-muted active:bg-muted shadow-sm hover:shadow transform hover:-translate-y-0.5;
   }
 
   .btn-sm {
@@ -61,7 +106,7 @@
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-200;
+    @apply bg-card text-card-foreground rounded-xl shadow-sm overflow-hidden transition-all duration-200;
   }
 
   .card-hover {
@@ -69,11 +114,11 @@
   }
 
   .input {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-shadow duration-200;
+    @apply w-full px-3 py-2 bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow duration-200;
   }
 
   .select {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-shadow duration-200;
+    @apply w-full px-3 py-2 bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow duration-200;
   }
 
   .container {
@@ -89,23 +134,23 @@
   }
 
   .badge-primary {
-    @apply bg-teal-100 text-teal-800 hover:bg-teal-200;
+    @apply bg-primary-100 text-primary-800 hover:bg-primary-200 dark:bg-primary-900 dark:text-primary-100;
   }
 
   .badge-secondary {
-    @apply bg-purple-100 text-purple-800 hover:bg-purple-200;
+    @apply bg-secondary-100 text-secondary-800 hover:bg-secondary-200 dark:bg-secondary-900 dark:text-secondary-100;
   }
 
   .badge-success {
-    @apply bg-green-100 text-green-800 hover:bg-green-200;
+    @apply bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900 dark:text-green-100;
   }
 
   .badge-warning {
-    @apply bg-amber-100 text-amber-800 hover:bg-amber-200;
+    @apply bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-900 dark:text-amber-100;
   }
 
   .badge-error {
-    @apply bg-red-100 text-red-800 hover:bg-red-200;
+    @apply bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-900 dark:text-red-100;
   }
 }
 
@@ -139,7 +184,7 @@
 }
 
 .listing-card:hover .card-title {
-  color: #0891b2; /* teal-600 */
+  @apply text-primary-600 dark:text-primary-400;
 }
 
 /* Navigation menu animation */
@@ -154,7 +199,7 @@
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #0891b2; /* teal-600 */
+  @apply bg-primary-600 dark:bg-primary-400;
   transition: width 0.3s ease;
 }
 
@@ -165,7 +210,7 @@
 
 /* Loading skeleton animation */
 .skeleton {
-  @apply bg-gray-200 animate-pulse rounded;
+  @apply bg-muted animate-pulse rounded;
 }
 
 /* Custom scrollbar */
@@ -175,30 +220,30 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100;
+  @apply bg-muted;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+  @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/40 transition-colors;
 }
 
 /* Focus styles */
 *:focus-visible {
-  @apply outline-none ring-2 ring-teal-500 ring-offset-2;
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
 }
 
 /* Form validation styles */
 .input.error {
-  @apply border-red-500 focus:ring-red-500;
+  @apply border-destructive focus:ring-destructive;
 }
 
 .error-message {
-  @apply text-sm text-red-600 mt-1;
+  @apply text-sm text-destructive mt-1;
 }
 
 /* Toast notifications */
 .toast {
-  @apply fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 transform transition-all duration-300;
+  @apply fixed bottom-4 right-4 bg-card text-card-foreground rounded-lg shadow-lg p-4 transform transition-all duration-300;
 }
 
 .toast-enter {
@@ -228,10 +273,10 @@
 
 /* Gradient text */
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-purple-600;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500;
 }
 
 /* Glass effect */
 .glass {
-  @apply bg-white bg-opacity-20 backdrop-blur-lg;
+  @apply bg-background/20 backdrop-blur-lg;
 }
