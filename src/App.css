@@ -117,6 +117,26 @@
     border-color: hsl(var(--input));
   }
   
+  .border-destructive {
+    border-color: hsl(var(--destructive));
+  }
+  
+  .border-primary {
+    border-color: hsl(var(--primary));
+  }
+  
+  .border-secondary {
+    border-color: hsl(var(--secondary));
+  }
+  
+  .border-accent {
+    border-color: hsl(var(--accent));
+  }
+  
+  .border-muted {
+    border-color: hsl(var(--muted));
+  }
+  
   .ring-ring {
     --tw-ring-color: hsl(var(--ring));
   }
@@ -205,6 +225,10 @@
     @apply border border-border bg-background text-foreground hover:bg-muted active:bg-muted shadow-sm;
   }
 }
+
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
