@@ -121,6 +121,22 @@
     --tw-ring-color: hsl(var(--ring));
   }
   
+  .ring-offset-background {
+    --tw-ring-offset-color: hsl(var(--background));
+  }
+  
+  .focus-visible\:ring-offset-background:focus-visible {
+    --tw-ring-offset-color: hsl(var(--background));
+  }
+  
+  .focus\:ring-ring:focus {
+    --tw-ring-color: hsl(var(--ring));
+  }
+  
+  .focus-visible\:ring-ring:focus-visible {
+    --tw-ring-color: hsl(var(--ring));
+  }
+  
   /* Opacity variants for backgrounds */
   .bg-muted-foreground\/10 {
     background-color: hsl(var(--muted-foreground) / 0.1);
@@ -189,7 +205,6 @@
     @apply border border-border bg-background text-foreground hover:bg-muted active:bg-muted shadow-sm;
   }
 }
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
