@@ -90,4 +90,6 @@ module.exports = {
       },
     },
   },
+  // (Optional but recommended)
+  plugins: [],
 };
