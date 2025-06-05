@@ -76,6 +76,7 @@
 
   .border-border      { border-color: hsl(var(--border)); }
   .bg-background      { background-color: hsl(var(--background)); }
+  .bg-muted           { background-color: hsl(var(--muted)); }
   .text-foreground    { color: hsl(var(--foreground)); }
   .text-muted-foreground { color: hsl(var(--muted-foreground)); }
   .border-input       { border-color: hsl(var(--input)); }
@@ -119,7 +120,7 @@
   }
 
   .btn-outline {
-    @apply border border-border bg-background text-foreground hover:bg-muted active:bg-muted shadow-sm hover:shadow transform hover:-translate-y-0.5;
+    @apply border border-border bg-background text-foreground hover:bg-background/90 active:bg-background/80 shadow-sm hover:shadow transform hover:-translate-y-0.5;
   }
 
   .btn-sm { @apply px-3 py-1 text-sm; }
