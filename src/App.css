@@ -280,20 +280,3 @@
 .glass {
   @apply bg-background/20 backdrop-blur-lg;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer utilities {
-  .bg-background {
-    @apply bg-gray-900; /* or whatever background you want */
-  }
-}
-@layer utilities {
-  .bg-muted {
-    background-color: #f1f1f1; /* or whatever muted color you want */
-  }
-}
