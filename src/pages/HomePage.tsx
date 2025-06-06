@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, CheckCircle, MessageSquare, Star, ArrowRight } from 'lucide-react';
-import { getServicesWithProviders, getProductsWithSellers, getVehiclesWithOwners } from '../data/mockData';
+import { Search, CheckCircle, MessageSquare, Star, ArrowRight, Scissors, Wrench, Car, Camera, Palette, Zap, Home, Music, GraduationCap, Laugh, Sparkles } from 'lucide-react';
+import { getServicesWithProviders, getProductsWithSellers, getVehiclesWithOwners, getCategories } from '../data/mockData';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ const HomePage: React.FC = () => {
   const services = getServicesWithProviders().slice(0, 4);
   const products = getProductsWithSellers().slice(0, 2);
   const vehicles = getVehiclesWithOwners().slice(0, 2);
+  const categories = getCategories();
 
   const locations = [
     'San Francisco, CA',
@@ -34,6 +35,38 @@ const HomePage: React.FC = () => {
     navigate(`/browse?${params.toString()}`);
   };
 
+  const handleCategoryClick = (categoryId: string) => {
+    navigate(`/browse?category=${categoryId}`);
+  };
+
+  // Service category icons mapping
+  const getCategoryIcon = (categoryId: string) => {
+    const iconMap: { [key: string]: React.ReactNode } = {
+      'salon': <Scissors size={24} />,
+      'cleaning': <Sparkles size={24} />,
+      'appliance': <Wrench size={24} />,
+      'auto': <Car size={24} />,
+      'photography': <Camera size={24} />,
+      'painting': <Palette size={24} />,
+      'electrician': <Zap size={24} />,
+      'plumbing': <Home size={24} />,
+      'music': <Music size={24} />,
+      'classes': <GraduationCap size={24} />,
+      'comedy': <Laugh size={24} />,
+      'programming': <Wrench size={24} />,
+      'design': <Palette size={24} />,
+      'writing': <GraduationCap size={24} />,
+      'marketing': <Star size={24} />,
+      'video': <Camera size={24} />,
+      'audio': <Music size={24} />,
+      'cooking': <Home size={24} />,
+      'teaching': <GraduationCap size={24} />,
+      'entertainment': <Laugh size={24} />,
+      'hotels': <Home size={24} />,
+    };
+    return iconMap[categoryId] || <Wrench size={24} />;
+  };
+
   return (
     <div className="animate-fadeIn">
       {/* Hero Section */}
@@ -42,8 +75,8 @@ const HomePage: React.FC = () => {
         <div className="container mx-auto px-4 py-24 relative">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Find Services & Products <br />
-              from Verified Providers
+              Home services at your <br />
+              doorstep
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-100">
               Connect with skilled professionals and quality products in your area
@@ -54,7 +87,7 @@ const HomePage: React.FC = () => {
                 <div className="relative">
                   <input
                     type="text"
-                    placeholder="What service are you looking for?"
+                    placeholder="What are you looking for?"
                     className="w-full pl-10 pr-3 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -89,12 +122,12 @@ const HomePage: React.FC = () => {
           
           <div className="flex flex-wrap justify-center gap-4 text-center">
             <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
-              <p className="text-3xl font-bold">500+</p>
-              <p>Verified Providers</p>
+              <p className="text-3xl font-bold">4.8</p>
+              <p>Service Rating*</p>
             </div>
             <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
-              <p className="text-3xl font-bold">1000+</p>
-              <p>Service Listings</p>
+              <p className="text-3xl font-bold">12M+</p>
+              <p>Customers Globally*</p>
             </div>
             <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
               <p className="text-3xl font-bold">50+</p>
@@ -104,6 +137,44 @@ const HomePage: React.FC = () => {
               <p className="text-3xl font-bold">98%</p>
               <p>Satisfied Clients</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Categories Banner */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">What are you looking for?</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover our wide range of professional services available at your doorstep
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {categories.slice(0, 12).map((category) => (
+              <div
+                key={category.id}
+                onClick={() => handleCategoryClick(category.id)}
+                className="text-center p-6 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 cursor-pointer group hover:shadow-md"
+              >
+                <div className="service-category-icon group-hover:scale-110 transition-transform duration-200">
+                  {getCategoryIcon(category.id)}
+                </div>
+                <h3 className="font-medium text-gray-900 text-sm leading-tight">
+                  {category.label}
+                </h3>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-8">
+            <Link 
+              to="/browse" 
+              className="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium"
+            >
+              View All Categories <ArrowRight size={16} className="ml-1" />
+            </Link>
           </div>
         </div>
       </section>
