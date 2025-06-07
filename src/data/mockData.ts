@@ -263,28 +263,3 @@ export const getCategories = (): { id: Category; label: string }[] => {
     { id: 'other', label: 'Other Services' }
   ];
 };
-
-// Popular categories for homepage
-export const getPopularCategories = () => {
-  return [
-    { id: 'restaurants', label: 'Restaurants', icon: '🍽️' },
-    { id: 'hotels', label: 'Hotels', icon: '🏨' },
-    { id: 'salon', label: 'Beauty Spa', icon: '💅' },
-    { id: 'property', label: 'Home Decor', icon: '🏠' },
-    { id: 'entertainment', label: 'Wedding', icon: '💒' },
-    { id: 'teaching', label: 'Education', icon: '🎓' },
-    { id: 'vehicle', label: 'Rent & Hire', icon: '🚗' },
-    { id: 'hospitals', label: 'Hospitals', icon: '🏥' },
-    { id: 'contractors', label: 'Contractors', icon: '👷' },
-    { id: 'pet-shops', label: 'Pet Shops', icon: '🐕' },
-    { id: 'hostels', label: 'PG/Hostels', icon: '🏠' },
-    { id: 'estate-agent', label: 'Estate Agent', icon: '🏢' },
-    { id: 'dentists', label: 'Dentists', icon: '🦷' },
-    { id: 'gym', label: 'Gym', icon: '💪' },
-    { id: 'event-organisers', label: 'Event Organisers', icon: '🎉' },
-    { id: 'driving-schools', label: 'Driving Schools', icon: '🚗' },
-    { id: 'packers-movers', label: 'Packers & Movers', icon: '📦' },
-    { id: 'courier', label: 'Courier Service', icon: '📮' },
-    { id: 'popular', label: 'Popular Categories', icon: '⭐' }
-  ];
-};

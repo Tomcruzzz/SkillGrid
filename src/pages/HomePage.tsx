@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, CheckCircle, MessageSquare, Star, ArrowRight, ChevronRight, MapPin } from 'lucide-react';
-import { getServicesWithProviders, getProductsWithSellers, getVehiclesWithOwners, getPopularCategories } from '../data/mockData';
+import { Search, CheckCircle, MessageSquare, Star, ArrowRight, Scissors, Wrench, Car, Camera, Palette, Zap, Home, Music, GraduationCap, Laugh, Sparkles } from 'lucide-react';
+import { getServicesWithProviders, getProductsWithSellers, getVehiclesWithOwners, getCategories } from '../data/mockData';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
   const services = getServicesWithProviders().slice(0, 4);
   const products = getProductsWithSellers().slice(0, 2);
   const vehicles = getVehiclesWithOwners().slice(0, 2);
-  const popularCategories = getPopularCategories();
+  const categories = getCategories();
 
   const locations = [
     'San Francisco, CA',
@@ -39,25 +39,70 @@ const HomePage: React.FC = () => {
     navigate(`/browse?category=${categoryId}`);
   };
 
+  // Service category icons mapping
+  const getCategoryIcon = (categoryId: string) => {
+    const iconMap: { [key: string]: React.ReactNode } = {
+      'salon': <Scissors size={24} />,
+      'cleaning': <Sparkles size={24} />,
+      'appliance': <Wrench size={24} />,
+      'auto': <Car size={24} />,
+      'photography': <Camera size={24} />,
+      'painting': <Palette size={24} />,
+      'electrician': <Zap size={24} />,
+      'plumbing': <Home size={24} />,
+      'music': <Music size={24} />,
+      'classes': <GraduationCap size={24} />,
+      'comedy': <Laugh size={24} />,
+      'programming': <Wrench size={24} />,
+      'design': <Palette size={24} />,
+      'writing': <GraduationCap size={24} />,
+      'marketing': <Star size={24} />,
+      'video': <Camera size={24} />,
+      'audio': <Music size={24} />,
+      'cooking': <Home size={24} />,
+      'teaching': <GraduationCap size={24} />,
+      'entertainment': <Laugh size={24} />,
+      'hotels': <Home size={24} />,
+    };
+    return iconMap[categoryId] || <Wrench size={24} />;
+  };
+
   return (
     <div className="animate-fadeIn">
       {/* Hero Section */}
-      <section className="bg-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              Search across <span className="text-blue-600">'5.9 Crore+'</span> <span className="text-blue-600">Products & Services</span>
+      <section className="relative bg-gradient-to-r from-teal-600 to-purple-700 text-white">
+        <div className="absolute inset-0 bg-gray-900 opacity-30"></div>
+        <div className="container mx-auto px-4 py-24 relative">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Home services at your <br />
+              doorstep
             </h1>
+            <p className="text-xl md:text-2xl mb-8 text-gray-100">
+              Connect with skilled professionals and quality products in your area
+            </p>
             
-            <form onSubmit={handleSearch} className="max-w-4xl mx-auto flex flex-col md:flex-row gap-4 mb-8">
-              <div className="flex-1 relative">
-                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <form onSubmit={handleSearch} className="bg-white p-2 md:p-3 rounded-lg shadow-lg flex flex-col md:flex-row">
+              <div className="flex-1 mb-2 md:mb-0 md:mr-2">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="What are you looking for?"
+                    className="w-full pl-10 pr-3 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                </div>
+              </div>
+              
+              <div className="flex-1 mb-2 md:mb-0 md:mr-2">
                 <select
-                  className="w-full pl-10 pr-3 py-4 border border-gray-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   value={selectedLocation}
                   onChange={(e) => setSelectedLocation(e.target.value)}
                 >
-                  <option value="">Select Location</option>
+                  <option value="">All Locations</option>
                   {locations.map((location) => (
                     <option key={location} value={location}>
                       {location}
@@ -66,106 +111,80 @@ const HomePage: React.FC = () => {
                 </select>
               </div>
               
-              <div className="flex-2 relative">
-                <input
-                  type="text"
-                  placeholder="Search for services, products, restaurants..."
-                  className="w-full pl-4 pr-12 py-4 border border-gray-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-lg transition-colors"
-                >
-                  <Search size={20} />
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200"
+              >
+                Search
+              </button>
             </form>
           </div>
-
-          {/* Service Banners */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-            {/* Hotels Banner */}
-            <div className="bg-gradient-to-r from-amber-600 to-amber-700 rounded-xl p-6 text-white relative overflow-hidden">
-              <div className="relative z-10">
-                <h3 className="text-xl font-semibold mb-2">Search</h3>
-                <p className="text-amber-100 mb-1">compare prices &</p>
-                <p className="text-2xl font-bold mb-4">book hotels</p>
-                <button className="bg-white text-amber-700 px-4 py-2 rounded-lg font-medium hover:bg-amber-50 transition-colors">
-                  GET BEST DEALS
-                </button>
-              </div>
-              <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-amber-500 to-transparent opacity-50"></div>
+          
+          <div className="flex flex-wrap justify-center gap-4 text-center">
+            <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
+              <p className="text-3xl font-bold">4.8</p>
+              <p>Service Rating*</p>
             </div>
-
-            {/* B2B Banner */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 text-white relative overflow-hidden">
-              <div className="relative z-10">
-                <h3 className="text-xl font-semibold mb-2">B2B</h3>
-                <p className="text-blue-100 mb-1">Quick</p>
-                <p className="text-2xl font-bold mb-4">Quotes</p>
-                <button className="bg-white text-blue-700 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
-                  GET QUOTES
-                </button>
-              </div>
+            <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
+              <p className="text-3xl font-bold">12M+</p>
+              <p>Customers Globally*</p>
             </div>
-
-            {/* Repairs & Services Banner */}
-            <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 rounded-xl p-6 text-white relative overflow-hidden">
-              <div className="relative z-10">
-                <h3 className="text-xl font-semibold mb-2">REPAIRS &</h3>
-                <p className="text-2xl font-bold mb-1">SERVICES</p>
-                <p className="text-indigo-100 mb-4">Get Nearest Vendor</p>
-                <button className="bg-white text-indigo-700 px-4 py-2 rounded-lg font-medium hover:bg-indigo-50 transition-colors">
-                  BOOK NOW
-                </button>
-              </div>
+            <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
+              <p className="text-3xl font-bold">50+</p>
+              <p>Categories</p>
             </div>
-
-            {/* Real Estate Banner */}
-            <div className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl p-6 text-white relative overflow-hidden">
-              <div className="relative z-10">
-                <h3 className="text-xl font-semibold mb-2">REAL ESTATE</h3>
-                <p className="text-purple-100 mb-1">Finest</p>
-                <p className="text-2xl font-bold mb-4">Agents</p>
-                <button className="bg-white text-purple-700 px-4 py-2 rounded-lg font-medium hover:bg-purple-50 transition-colors">
-                  FIND AGENTS
-                </button>
-              </div>
+            <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
+              <p className="text-3xl font-bold">98%</p>
+              <p>Satisfied Clients</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Popular Categories */}
-      <section className="py-12 bg-gray-50">
+      {/* Services Categories Banner */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4">
-            {popularCategories.map((category, index) => (
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">What are you looking for?</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover our wide range of professional services available at your doorstep
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {categories.slice(0, 12).map((category) => (
               <div
                 key={category.id}
                 onClick={() => handleCategoryClick(category.id)}
-                className="bg-white rounded-xl p-4 text-center cursor-pointer hover:shadow-md transition-all duration-200 group"
+                className="text-center p-6 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 cursor-pointer group hover:shadow-md"
               >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-200">
-                  {category.icon}
+                <div className="service-category-icon group-hover:scale-110 transition-transform duration-200">
+                  {getCategoryIcon(category.id)}
                 </div>
-                <h3 className="text-sm font-medium text-gray-800 leading-tight">
+                <h3 className="font-medium text-gray-900 text-sm leading-tight">
                   {category.label}
                 </h3>
               </div>
             ))}
           </div>
+          
+          <div className="text-center mt-8">
+            <Link 
+              to="/browse" 
+              className="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium"
+            >
+              View All Categories <ArrowRight size={16} className="ml-1" />
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Featured Services */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-10">
             <h2 className="text-3xl font-bold text-gray-900">Featured Services</h2>
-            <Link to="/browse" className="text-blue-600 hover:text-blue-700 flex items-center font-medium">
+            <Link to="/browse" className="text-teal-600 hover:text-teal-700 flex items-center font-medium">
               View All <ArrowRight size={16} className="ml-1" />
             </Link>
           </div>
@@ -191,7 +210,7 @@ const HomePage: React.FC = () => {
                     </div>
                   </div>
                   <div className="p-4 flex flex-col flex-grow">
-                    <h3 className="text-lg font-medium mb-2 group-hover:text-blue-600 transition-colors">{service.title}</h3>
+                    <h3 className="text-lg font-medium mb-2 group-hover:text-teal-600 transition-colors">{service.title}</h3>
                     
                     <div className="flex items-center mb-2">
                       <div className="flex items-center text-amber-500">
@@ -235,7 +254,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">How It Works</h2>
@@ -246,8 +265,8 @@ const HomePage: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                <Search size={30} className="text-blue-600" />
+              <div className="w-16 h-16 mx-auto mb-4 bg-teal-100 rounded-full flex items-center justify-center">
+                <Search size={30} className="text-teal-600" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Search</h3>
               <p className="text-gray-600">
@@ -256,8 +275,8 @@ const HomePage: React.FC = () => {
             </div>
             
             <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                <MessageSquare size={30} className="text-blue-600" />
+              <div className="w-16 h-16 mx-auto mb-4 bg-teal-100 rounded-full flex items-center justify-center">
+                <MessageSquare size={30} className="text-teal-600" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Connect</h3>
               <p className="text-gray-600">
@@ -266,8 +285,8 @@ const HomePage: React.FC = () => {
             </div>
             
             <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                <CheckCircle size={30} className="text-blue-600" />
+              <div className="w-16 h-16 mx-auto mb-4 bg-teal-100 rounded-full flex items-center justify-center">
+                <CheckCircle size={30} className="text-teal-600" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Book & Pay</h3>
               <p className="text-gray-600">
@@ -279,14 +298,14 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Featured Products & Rentals */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Products */}
             <div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Quality Products</h2>
-                <Link to="/browse?type=products" className="text-blue-600 hover:text-blue-700 flex items-center font-medium">
+                <Link to="/browse?type=products" className="text-teal-600 hover:text-teal-700 flex items-center font-medium">
                   View All <ArrowRight size={16} className="ml-1" />
                 </Link>
               </div>
@@ -309,7 +328,7 @@ const HomePage: React.FC = () => {
                       <div className="p-4 flex flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between">
-                            <h3 className="text-lg font-medium group-hover:text-blue-600 transition-colors">{product.title}</h3>
+                            <h3 className="text-lg font-medium group-hover:text-teal-600 transition-colors">{product.title}</h3>
                             <span className="badge badge-secondary ml-2">
                               {product.condition}
                             </span>
@@ -331,7 +350,7 @@ const HomePage: React.FC = () => {
             <div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Vehicle Rentals</h2>
-                <Link to="/browse?type=vehicles" className="text-blue-600 hover:text-blue-700 flex items-center font-medium">
+                <Link to="/browse?type=vehicles" className="text-teal-600 hover:text-teal-700 flex items-center font-medium">
                   View All <ArrowRight size={16} className="ml-1" />
                 </Link>
               </div>
@@ -354,7 +373,7 @@ const HomePage: React.FC = () => {
                       <div className="p-4 flex flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between">
-                            <h3 className="text-lg font-medium group-hover:text-blue-600 transition-colors">
+                            <h3 className="text-lg font-medium group-hover:text-teal-600 transition-colors">
                               {vehicle.make} {vehicle.model}
                             </h3>
                             <span className="badge badge-secondary ml-2">
@@ -377,7 +396,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-purple-700 to-teal-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Have a Service to Offer?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
@@ -385,7 +404,7 @@ const HomePage: React.FC = () => {
           </p>
           <Link 
             to="/register" 
-            className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium text-lg inline-block transition-colors duration-200"
+            className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium text-lg inline-block transition-colors duration-200"
           >
             Get Started
           </Link>
