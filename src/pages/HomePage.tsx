@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, CheckCircle, MessageSquare, Star, ArrowRight, Scissors, Wrench, Car, Camera, Palette, Zap, Home, Music, GraduationCap, Laugh, Sparkles } from 'lucide-react';
+import { Search, CheckCircle, MessageSquare, ArrowRight, Scissors, Wrench, Car, Camera, Palette, Zap, Home, Music, GraduationCap, Laugh, Sparkles } from 'lucide-react';
 import { getServicesWithProviders, getProductsWithSellers, getVehiclesWithOwners, getCategories } from '../data/mockData';
 
 const HomePage: React.FC = () => {
@@ -56,7 +56,7 @@ const HomePage: React.FC = () => {
       'programming': <Wrench size={24} />,
       'design': <Palette size={24} />,
       'writing': <GraduationCap size={24} />,
-      'marketing': <Star size={24} />,
+      'marketing': <Wrench size={24} />,
       'video': <Camera size={24} />,
       'audio': <Music size={24} />,
       'cooking': <Home size={24} />,
@@ -75,8 +75,8 @@ const HomePage: React.FC = () => {
         <div className="container mx-auto px-4 py-24 relative">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Home services at your <br />
-              doorstep
+              Products and Home services <br />
+              at your doorstep
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-100">
               Connect with skilled professionals and quality products in your area
@@ -119,40 +119,21 @@ const HomePage: React.FC = () => {
               </button>
             </form>
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-4 text-center">
-            <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
-              <p className="text-3xl font-bold">4.8</p>
-              <p>Service Rating*</p>
-            </div>
-            <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
-              <p className="text-3xl font-bold">12M+</p>
-              <p>Customers Globally*</p>
-            </div>
-            <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
-              <p className="text-3xl font-bold">50+</p>
-              <p>Categories</p>
-            </div>
-            <div className="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg shadow">
-              <p className="text-3xl font-bold">98%</p>
-              <p>Satisfied Clients</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Services Categories Banner */}
+      {/* Popular Categories */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">What are you looking for?</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">Popular Categories</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover our wide range of professional services available at your doorstep
+              Discover our wide range of professional services and quality products
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {categories.slice(0, 12).map((category) => (
+            {categories.slice(0, 18).map((category) => (
               <div
                 key={category.id}
                 onClick={() => handleCategoryClick(category.id)}
@@ -211,15 +192,6 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="p-4 flex flex-col flex-grow">
                     <h3 className="text-lg font-medium mb-2 group-hover:text-teal-600 transition-colors">{service.title}</h3>
-                    
-                    <div className="flex items-center mb-2">
-                      <div className="flex items-center text-amber-500">
-                        <Star size={16} className="fill-current" />
-                      </div>
-                      <span className="font-medium ml-1">{service.rating}</span>
-                      <span className="text-gray-500 text-sm ml-1">({service.reviewCount} reviews)</span>
-                    </div>
-                    
                     <p className="text-gray-600 mb-3 line-clamp-2">{service.description}</p>
                     
                     <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between">
