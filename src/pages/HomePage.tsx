@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, CheckCircle, MessageSquare, ArrowRight, Scissors, Wrench, Car, Camera, Palette, Zap, Home, Music, GraduationCap, Laugh, Sparkles } from 'lucide-react';
+import { Search, CheckCircle, Users, Star, Scissors, Wrench, Car, Camera, Palette, Zap, Home, Music, GraduationCap, Laugh, Sparkles, Hotel, Utensils, Building } from 'lucide-react';
 import { getServicesWithProviders, getProductsWithSellers, getVehiclesWithOwners, getCategories } from '../data/mockData';
 
 const HomePage: React.FC = () => {
@@ -8,9 +8,7 @@ const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [selectedLocation, setSelectedLocation] = React.useState('');
   
-  const services = getServicesWithProviders().slice(0, 4);
-  const products = getProductsWithSellers().slice(0, 2);
-  const vehicles = getVehiclesWithOwners().slice(0, 2);
+  const services = getServicesWithProviders().slice(0, 3);
   const categories = getCategories();
 
   const locations = [
@@ -59,88 +57,132 @@ const HomePage: React.FC = () => {
       'marketing': <Wrench size={24} />,
       'video': <Camera size={24} />,
       'audio': <Music size={24} />,
-      'cooking': <Home size={24} />,
+      'cooking': <Utensils size={24} />,
       'teaching': <GraduationCap size={24} />,
       'entertainment': <Laugh size={24} />,
-      'hotels': <Home size={24} />,
+      'hotels': <Hotel size={24} />,
+      'other': <Building size={24} />,
     };
     return iconMap[categoryId] || <Wrench size={24} />;
   };
 
   return (
     <div className="animate-fadeIn">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-teal-600 to-purple-700 text-white">
-        <div className="absolute inset-0 bg-gray-900 opacity-30"></div>
-        <div className="container mx-auto px-4 py-24 relative">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Products and Home services <br />
-              at your doorstep
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-100">
-              Connect with skilled professionals and quality products in your area
-            </p>
-            
-            <form onSubmit={handleSearch} className="bg-white p-2 md:p-3 rounded-lg shadow-lg flex flex-col md:flex-row">
-              <div className="flex-1 mb-2 md:mb-0 md:mr-2">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="What are you looking for?"
-                    className="w-full pl-10 pr-3 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+      {/* Hero Section - Dark like SkillGrid */}
+      <section className="bg-gray-800 text-white">
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Left side - Text and Search */}
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                  Find Local Services<br />
+                  & Rentals Near You
+                </h1>
+                <p className="text-xl mb-8 text-gray-300">
+                  Verified marketplace connecting you with real-world services and rentals in your area. Safe, secure, and location-based.
+                </p>
+                
+                <div className="flex gap-4 mb-8">
+                  <button className="bg-white text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                    Find Services
+                  </button>
+                  <button className="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-gray-800 transition-colors">
+                    List Your Service
+                  </button>
                 </div>
               </div>
               
-              <div className="flex-1 mb-2 md:mb-0 md:mr-2">
-                <select
-                  className="w-full px-3 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                >
-                  <option value="">All Locations</option>
-                  {locations.map((location) => (
-                    <option key={location} value={location}>
-                      {location}
-                    </option>
-                  ))}
-                </select>
+              {/* Right side - Video placeholder */}
+              <div className="bg-gray-700 rounded-lg h-64 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gray-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <div className="w-0 h-0 border-l-8 border-l-white border-t-4 border-t-transparent border-b-4 border-b-transparent ml-1"></div>
+                  </div>
+                  <p className="text-gray-300">Marketplace Intro</p>
+                </div>
               </div>
-              
-              <button
-                type="submit"
-                className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200"
-              >
-                Search
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Popular Categories */}
+      {/* Search Section - White card like SkillGrid */}
+      <section className="bg-gray-100 py-8">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-semibold text-center mb-6">What are you looking for?</h2>
+              
+              <form onSubmit={handleSearch} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Service or rental"
+                      className="w-full pl-4 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </div>
+                  
+                  <div className="relative">
+                    <select
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent appearance-none bg-white"
+                      value={selectedLocation}
+                      onChange={(e) => setSelectedLocation(e.target.value)}
+                    >
+                      <option value="">Location</option>
+                      {locations.map((location) => (
+                        <option key={location} value={location}>
+                          {location}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full bg-gray-800 text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
+                >
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Categories - Exactly like SkillGrid */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">Popular Categories</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover our wide range of professional services and quality products
-            </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {categories.slice(0, 18).map((category) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
+            {[
+              { id: 'salon', label: 'Salon & Beauty', icon: <Scissors size={24} /> },
+              { id: 'cleaning', label: 'Cleaning', icon: <Sparkles size={24} /> },
+              { id: 'appliance', label: 'Appliance Repair', icon: <Wrench size={24} /> },
+              { id: 'classes', label: 'Classes', icon: <GraduationCap size={24} /> },
+              { id: 'music', label: 'Music Services', icon: <Music size={24} /> },
+              { id: 'photography', label: 'Photography', icon: <Camera size={24} /> },
+              { id: 'painting', label: 'Painting & Art', icon: <Palette size={24} /> },
+              { id: 'electrician', label: 'Electrician', icon: <Zap size={24} /> },
+              { id: 'auto', label: 'Auto Services', icon: <Car size={24} /> },
+              { id: 'hotels', label: 'Hotels', icon: <Hotel size={24} /> },
+              { id: 'comedy', label: 'Comedy Shows', icon: <Laugh size={24} /> },
+              { id: 'cooking', label: 'Cooking', icon: <Utensils size={24} /> },
+            ].map((category) => (
               <div
                 key={category.id}
                 onClick={() => handleCategoryClick(category.id)}
                 className="text-center p-6 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 cursor-pointer group hover:shadow-md"
               >
-                <div className="service-category-icon group-hover:scale-110 transition-transform duration-200">
-                  {getCategoryIcon(category.id)}
+                <div className="w-12 h-12 mx-auto mb-3 p-3 rounded-full bg-gray-200 text-gray-600 group-hover:bg-teal-100 group-hover:text-teal-600 transition-colors duration-200">
+                  {category.icon}
                 </div>
                 <h3 className="font-medium text-gray-900 text-sm leading-tight">
                   {category.label}
@@ -148,238 +190,83 @@ const HomePage: React.FC = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Why Choose SkillGrid */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Why Choose SkillGrid?</h2>
+            <p className="text-lg text-gray-600">
+              Trusted, verified, and location-based marketplace
+            </p>
+          </div>
           
-          <div className="text-center mt-8">
-            <Link 
-              to="/browse" 
-              className="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium"
-            >
-              View All Categories <ArrowRight size={16} className="ml-1" />
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+                <CheckCircle size={30} className="text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Verified Providers</h3>
+              <p className="text-gray-600">
+                All service providers are background checked and verified for your safety and peace of mind.
+              </p>
+            </div>
+            
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+                <Search size={30} className="text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Location-Based</h3>
+              <p className="text-gray-600">
+                Find services and rentals in your immediate area for convenience and quick access.
+              </p>
+            </div>
+            
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+                <Star size={30} className="text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Rated & Reviewed</h3>
+              <p className="text-gray-600">
+                Read genuine reviews and ratings from other customers to make informed decisions.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Featured Services */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900">Featured Services</h2>
-            <Link to="/browse" className="text-teal-600 hover:text-teal-700 flex items-center font-medium">
-              View All <ArrowRight size={16} className="ml-1" />
-            </Link>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Featured Services</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {services.map((service) => (
               <Link 
                 key={service.id} 
                 to={`/services/${service.id}`}
                 className="group"
               >
-                <div className="card card-hover h-full flex flex-col">
-                  <div className="relative h-48">
-                    <img 
-                      src={service.images[0]} 
-                      alt={service.title} 
-                      className="w-full h-full object-cover rounded-t-xl"
-                    />
-                    <div className="absolute top-2 right-2">
-                      <span className="badge badge-primary">
-                        {service.category.charAt(0).toUpperCase() + service.category.slice(1)}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-4 flex flex-col flex-grow">
-                    <h3 className="text-lg font-medium mb-2 group-hover:text-teal-600 transition-colors">{service.title}</h3>
-                    <p className="text-gray-600 mb-3 line-clamp-2">{service.description}</p>
-                    
-                    <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between">
-                      <div className="font-bold text-gray-900">
-                        ${service.price}{service.priceType === 'hourly' ? '/hr' : service.priceType === 'daily' ? '/day' : ''}
-                      </div>
-                      
-                      {service.provider && (
-                        <div className="flex items-center">
-                          <div className="w-8 h-8 rounded-full overflow-hidden">
-                            {service.provider.avatar ? (
-                              <img 
-                                src={service.provider.avatar} 
-                                alt={service.provider.name} 
-                                className="w-full h-full object-cover"
-                              />
-                            ) : (
-                              <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-600">
-                                {service.provider.name.charAt(0)}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                <div className="bg-gray-100 rounded-xl h-48 mb-4 overflow-hidden">
+                  <img 
+                    src={service.images[0]} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
+                <h3 className="text-lg font-medium mb-2 group-hover:text-teal-600 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 text-sm line-clamp-2">
+                  {service.description}
+                </p>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">How It Works</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Connect with verified service providers and shop quality products in just a few steps
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-teal-100 rounded-full flex items-center justify-center">
-                <Search size={30} className="text-teal-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Search</h3>
-              <p className="text-gray-600">
-                Discover services, products, and rentals based on your location and preferences
-              </p>
-            </div>
-            
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-teal-100 rounded-full flex items-center justify-center">
-                <MessageSquare size={30} className="text-teal-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Connect</h3>
-              <p className="text-gray-600">
-                Message service providers, discuss your requirements, and get quotes
-              </p>
-            </div>
-            
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-teal-100 rounded-full flex items-center justify-center">
-                <CheckCircle size={30} className="text-teal-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Book & Pay</h3>
-              <p className="text-gray-600">
-                Book services, purchase products, or rent vehicles with secure payment options
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products & Rentals */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* Products */}
-            <div>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">Quality Products</h2>
-                <Link to="/browse?type=products" className="text-teal-600 hover:text-teal-700 flex items-center font-medium">
-                  View All <ArrowRight size={16} className="ml-1" />
-                </Link>
-              </div>
-              
-              <div className="grid grid-cols-1 gap-4">
-                {products.map((product) => (
-                  <Link 
-                    key={product.id} 
-                    to={`/products/${product.id}`}
-                    className="group"
-                  >
-                    <div className="card card-hover flex">
-                      <div className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
-                        <img 
-                          src={product.images[0]} 
-                          alt={product.title} 
-                          className="w-full h-full object-cover rounded-l-xl"
-                        />
-                      </div>
-                      <div className="p-4 flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-start justify-between">
-                            <h3 className="text-lg font-medium group-hover:text-teal-600 transition-colors">{product.title}</h3>
-                            <span className="badge badge-secondary ml-2">
-                              {product.condition}
-                            </span>
-                          </div>
-                          <p className="text-gray-600 text-sm line-clamp-1 mt-1">{product.description}</p>
-                        </div>
-                        <div className="flex items-center justify-between mt-2">
-                          <div className="font-bold">${product.price}</div>
-                          <div className="text-sm text-gray-500">{product.location}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-            
-            {/* Rentals */}
-            <div>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">Vehicle Rentals</h2>
-                <Link to="/browse?type=vehicles" className="text-teal-600 hover:text-teal-700 flex items-center font-medium">
-                  View All <ArrowRight size={16} className="ml-1" />
-                </Link>
-              </div>
-              
-              <div className="grid grid-cols-1 gap-4">
-                {vehicles.map((vehicle) => (
-                  <Link 
-                    key={vehicle.id} 
-                    to={`/vehicles/${vehicle.id}`}
-                    className="group"
-                  >
-                    <div className="card card-hover flex">
-                      <div className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
-                        <img 
-                          src={vehicle.images[0]} 
-                          alt={`${vehicle.make} ${vehicle.model}`} 
-                          className="w-full h-full object-cover rounded-l-xl"
-                        />
-                      </div>
-                      <div className="p-4 flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-start justify-between">
-                            <h3 className="text-lg font-medium group-hover:text-teal-600 transition-colors">
-                              {vehicle.make} {vehicle.model}
-                            </h3>
-                            <span className="badge badge-secondary ml-2">
-                              {vehicle.type}
-                            </span>
-                          </div>
-                          <p className="text-gray-600 text-sm mt-1">{vehicle.year} · {vehicle.location}</p>
-                        </div>
-                        <div className="font-bold mt-2">
-                          ${vehicle.price}{vehicle.priceType === 'hourly' ? '/hr' : '/day'}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-700 to-teal-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Have a Service to Offer?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join our community of verified service providers and reach thousands of potential clients
-          </p>
-          <Link 
-            to="/register" 
-            className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium text-lg inline-block transition-colors duration-200"
-          >
-            Get Started
-          </Link>
         </div>
       </section>
     </div>
